@@ -1,0 +1,46 @@
+<form method='POST' id='userform' action='procuser.php'>
+<div class='alert-success' id='msg'></div>
+<div class='spacer'></div>
+<?php echo "<input type='hidden' name='userid' value='$uid'>\n"; ?>
+<p>Approval level: <select name='applevel' id='applevel'>
+<option value=''>-select-</option>
+<?php
+foreach($approvallevels as $k=>$v) {
+  if($k == $uapp) {
+    echo "<option value='$k' selected>$k $$v</option>\n";
+  } else {
+    echo "<option value='$k'>$k $$v</option>\n";
+  }
+}
+?>
+</select>
+<p>Roles:
+<?php
+foreach($allroles as $r) {
+  $rn = $r->rolename;
+  if(in_array($rn, $eduserroles)) {
+    echo "<input type='checkbox' name='roles[]' value='$rn' checked>&nbsp;$rn&nbsp;&nbsp;";
+  } else {
+    echo "<input type='checkbox' name='roles[]' value='$rn'>&nbsp;$rn&nbsp;&nbsp;";
+  }
+}
+?>
+</p>
+<button type='button' id='savebtn'>Save</button>
+</form>
+<script>
+$("input[name='roles[]'], #applevel").change(function() {
+  $('#msg').html('');
+});
+$('#savebtn').click(function() {
+  $.ajax({
+    type: 'POST',
+    url: 'procuser.php',
+    data: $('#userform').serialize(),
+    dataType: 'html',
+    success: function(response) {
+      $('#msg').html("&nbsp;" + response);
+    }
+  });
+});
+</script>

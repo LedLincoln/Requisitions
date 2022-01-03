@@ -1,0 +1,53 @@
+<link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+<div class='container'>
+<nav class='navbar navbar-expand-md fixed-top navbar-custom'>
+<a class='navbar-brand' href='index.php'>LI-COR Requisitions</a>
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-label='Toggle navigation'>
+<span class='navbar-toggler-icon'></span>
+</button>
+<div class='collapse navbar-collapse' id='navbarCollapse'>
+<ul class="nav navbar-nav">
+<?php
+//show or suppress buttons below depending on permissions
+echo "<li><a class='nav-link' href='index.php'><span class='oi oi-list'></span> List</a></li>\n";
+echo "<li class='navbar-text nav-link point' id='savebtn'><span class='oi oi-arrow-circle-bottom' title='Save Only'></span> Save Only</li>\n";
+echo "<li class='navbar-text nav-link point' id='submitbtn'><span class='oi oi-share' title='Submit for Approval'></span> Submit for Approval</li>\n";
+if($status != "Quotation - Pending" and $status != "Quotation - Complete" and $status != "Approved") {
+  echo "<li class='navbar-text nav-link point' id='quotebtn'><span class='oi oi-question-mark' title='Submit for Quotation'></span> Submit for Quotation</li>\n";
+}
+if($status == "Quotation - Pending") {
+  echo "<li class='navbar-text nav-link point' id='retquote'><span class='oi oi-arrow-left' title='Return to Requester'></span> Return Quotation</li>\n";
+}
+if($currentusermax >= $total and $currentusermax > 0) {
+  echo "<li class='navbar-text nav-link point' id='approvebtn'><span class='oi oi-check' title='Approve'></span> Approve</li>\n";
+}
+//if supply chain or admin:
+if(in_array("Buyer", $userroles) or in_array("Admin", $userroles)) {
+  echo "<li class='navbar-text nav-link point' id='assignbtn'><span class='oi oi-arrow-thick-top' title='Assign'></span> Assign</li>\n";
+  echo "<li class='navbar-text nav-link point' id='closebtn'><span class='oi oi-file' title='Close'></span> Close</li>\n";
+} else {
+  if(($status == "New" or $status == "New Quotation" or $status == "Submitted for Approval" or $status == "Waiting for Assignment") and ($dn == $onbehalf or $dn == $createdby)) {
+    //users can close their own reqs
+    echo "<li class='navbar-text nav-link point' id='closebtn'><span class='oi oi-file' title='Close'></span> Cancel</li>\n";
+  }
+}
+//if member of Admin role:
+if(in_array("Admin", $userroles)) {
+  echo "<li class='nav-item dropdown'><a class='nav-link dropdown-toggle' href='#' id='adminDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='oi oi-cog' title='User Options'></span> Admin</a>\n";
+  echo "<ul class='dropdown-menu' aria-labelledby='adminDropdown'>\n";
+  echo "<li><a class='dropdown-item' href='listbc.php'>Buyer Codes</a></li>\n";
+  echo "<li><a class='dropdown-item' href='listusers.php'>Users</a></li>\n";
+  echo "<li class='dropdown-item point' id='changestatus'>Change Req Status</li></ul>\n";
+}
+echo "<li class='nav-item dropdown'><a class='nav-link dropdown-toggle' href='#' id='userDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='oi oi-person' title='User Options'></span> $dn</a>\n"; ?>
+<ul class='dropdown-menu' aria-labelledby='userDropdown'>
+<li class='dropdown-item point' id='logoff'>Log Off</li>
+</ul>
+</li>
+<li><ul class='dropdown-menu'>
+<li class='point'><a href='#' data-toggle='modal' data-target='#conflogoff'>Log Off</a></li>
+</ul></li>
+</ul>
+</div>
+</nav>
+</div>

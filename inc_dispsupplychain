@@ -1,0 +1,25 @@
+<?php
+echo "<div class='reqsec $rstyle'>\n";
+echo "<div class='row'>\n";
+echo "<div class='three columns lpad'><div class='labl'>Assigned to</div><div class='dval'>$assignedto</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Ordered by</div><div class='dval'>$orderedby</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>ERP PO type</div><div class='dval'>$erppotype</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Buyer code</div><div class='dval'>$buyercode</div></div>\n";
+?>
+</div>
+<div class='row'>
+<?php
+echo "<div class='three columns lpad'><div class='labl'>Order date</div><div class='dval x-big'>$orderdate</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Order method</div><div class='dval'>$ordermethod</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Vendor contact name</div><div class='dval'>$vendorcontact</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Confirmation number</div><div class='dval'>$confnumber</div></div>\n";
+?>
+</div>
+<div class='row'>
+<?php
+echo "<div class='three columns lpad'><div class='labl'>Payment included/check number</div><div class='dval x-big'>$payment</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Credit card info</div><div class='dval'>$ccard</div></div>\n";
+echo "<div class='three columns lpad'><div class='labl'>Transfer to DataFlo</div><div class='dval'>$xfer</div></div>\n";
+?>
+</div>
+</div>

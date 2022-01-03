@@ -1,0 +1,26 @@
+.xdetail {
+  background-color: #eee;
+  padding-left: 2em;
+}
+
+.money {
+  display: block;
+  text-align: right;
+  margin-right: 0;
+}
+
+.projlist li {
+  font-family: 'Courier New', monospace;
+}
+.ui-accordion .ui-accordion-header {
+  display: block;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.2em;
+  margin: 2px 0 0 0;
+  height: 100%;
+  padding: 5px;
+  background-color: #444488;
+  color: #ddf;
+}

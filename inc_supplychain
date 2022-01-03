@@ -1,0 +1,92 @@
+<?php echo "<div class='container reqsec $rstyle'>\n"; ?>
+<div class='row'>
+<div class='col-sm-2 h5'>Supply Chain</div>
+<?php echo "<div class='col-sm-3'><span class='labl'>Assigned to: </span><span class='dval'>$assignedto</span></div>\n"; ?>
+<div class='col-sm-2 text-right labl'>Buyer code:</div><div class='col-sm-5 dval'>
+<select class='compact' name='buyercode'>
+<option value=''>-select-</option>
+<?php
+foreach($buyercodes as $bc) {
+  $rnum = $bc->rolenum;
+  $rnam = $bc->rolename;
+  if($rnum == $buyercode) {
+    echo "<option value = '$rnum' selected>$rnum $rnam</option>\n";
+  } else {
+    echo "<option value = '$rnum'>$rnum $rnam</option>\n";
+  }
+}
+?>
+</select>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-2 text-right labl'>Ordered by:</div><div class='col-sm-2 dval'>
+<select class='compact' name='orderedby' id='orderedby'>
+<option value=''>-select-</option>
+<?php
+foreach($buyers as $b) {
+  $bn = $b->username;
+  if($bn == $orderedby) {
+    echo "<option value='$bn' selected>$bn</option>";
+  } else {
+    echo "<option value='$bn'>$bn</option>";
+  }
+}
+?>
+</select>
+</div>
+<div class='col-sm-2 text-right labl'>Order date:</div><div class='col-sm-2 dval'>
+<?php echo "<input type='date' class='compact' name='orderdate' id='orderdate' value='$orderdate'></div>\n"; ?>
+<div class='col-sm-2 text-right labl'>ERP PO type:</div><div class='col-sm-2 dval'>
+<select class='compact' name='erppotype'>
+<option value=''>-select-</option>
+<?php
+foreach($types as $t) {
+  if($t[0] == $erppotype) {
+    echo "<option value='$t[0]' selected>$t[1]</option>\n";
+  } else {
+    echo "<option value='$t[0]'>$t[1]</option>\n";
+  }
+}
+?>
+</select>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-2 text-right labl'>Vendor contact name:</div><div class='col-sm-2 dval'>
+<?php echo "<input type='text' class='compact' name='vendorcontact' value='$vendorcontact'></div>\n"; ?>
+<div class='col-sm-2 text-right labl'>Order method:</div><div class='col-sm-2 dval'>
+<select class='compact' name='ordermethod'>
+<option value=''>-select-</option>
+<?php
+foreach($methods as $m) {
+  if($m[0] == $ordermethod) {
+    echo "<option value='$m[0]' selected>$m[1]</option>\n";
+  } else {
+    echo "<option value='$m[0]'>$m[1]</option>\n";
+  }
+}
+?>
+</select></div>
+<div class='col-sm-2 text-right labl'>Ship via:</div><div class='col-sm-2 dval'>
+<?php
+echo "<input class='compact' list='shiplist' name='shipvia' id='shipvia' value='$shipvia'>\n";
+//echo "<option value=''>-select-</option>\n";
+echo "<datalist id='shiplist'>\n";
+foreach($vias as $v) {
+  echo "<option value='$v[1]' data-value='$v[0]'>\n";
+}
+?>
+</datalist>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-2 text-right labl'>Payment included/check number:</div><div class='col-sm-2 dval'>
+<?php echo "<input type='text' class='compact' name='payment' value='$payment'></div>\n"; ?>
+<div class='col-sm-2 text-right labl'>Credit card info:</div><div class='col-sm-2 dval'>
+<?php echo "<input type='text' class='compact' name='ccard' value='$ccard'></div>\n"; ?>
+<div class='col-sm-2 text-right labl'>Confirmation number:</div><div class='col-sm-2 dval'>
+<?php echo "<input type='text' class='compact' name='confnumber' value='$confnumber'></div>\n"; ?>
+</div>
+</div>
+</div>

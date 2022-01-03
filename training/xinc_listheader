@@ -1,0 +1,38 @@
+<link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+<div class='container'>
+<nav class='navbar navbar-expand-md fixed-top navbar-custom'>
+<a class='navbar-brand nav-linkx' href='/reqs'>LI-COR Requisitions</a>
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-label='Toggle navigation'>
+<span class='navbar-toggler-icon'></span>
+</button>
+<div class='collapse navbar-collapse' id='navbarCollapse'>
+<ul class="nav navbar-nav">
+<?php
+if(1==1) {
+//if(in_array_any($edroles, $userroles)) {
+  //echo "<li><a class='nav-link' href='/reqs/'><span class='oi oi-list'></span> List All</a></li>\n";
+}
+//echo "<li class='navbar-text nav-link point' id='savebtn'><span class='oi oi-arrow-circle-bottom' title='Save Only'></span> Save Only</li>\n";
+//echo "<li class='navbar-text nav-link point' id='submitbtn'><span class='oi oi-share' title='Submit for Approval'></span> Submit for Approval</li>\n";
+//echo "<li class='navbar-text nav-link point' id='quotebtn'><span class='oi oi-question-mark' title='Submit for Quotation'></span> Submit for Quotation</li>\n";
+//echo "<li class='navbar-text nav-link point' id='approvebtn'><span class='oi oi-check' title='Approve'></span> Approve</li>\n";
+echo "<li class='nav-item dropdown'><a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='oi oi-person' title='User Options'></span> Admin</a>\n";
+echo "<div class='dropdown-menu' aria-labelledby='navbarDropdown'>\n";
+echo "<a class='dropdown-item' href='listusers.php'>Users</a>\n";
+echo "<a class='dropdown-item' href='#'>System Settings</a>\n";
+echo "<li class='nav-item dropdown'><a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='oi oi-person' title='User Options'></span> $dn</a>\n";
+echo "<div class='dropdown-menu' aria-labelledby='navbarDropdown'>\n";
+echo "<a class='dropdown-item' href='#'>Preferences</a>\n";
+echo "<a class='dropdown-item' href='#'>Log Off</a>\n";
+echo "</div>\n";
+echo "</li>\n";
+?>
+</div>
+</li>
+<ul class='dropdown-menu'>
+<li class='point'><a href='#' data-toggle='modal' data-target='#conflogoff'>Log Off</a></li>
+</ul>
+</ul>
+</div>
+</nav>
+</div>

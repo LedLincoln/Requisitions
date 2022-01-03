@@ -1,0 +1,72 @@
+.bigpart {
+  font-size: 140%;
+  font-weight: 600;
+}
+
+.smallpart {
+  width: 50%;
+}
+
+.dropdown-item {
+  background-color: #eeeeff;
+}
+
+.dropdown-toggle:after {
+  content: none;
+}
+
+.labl {
+  margin-top: 4px;
+  font-size: 75%;
+  color: blue;
+  padding-right: 0;
+}
+
+.listhead {
+  top: 0px;
+  padding-top: 10px;
+  width: 84%;
+  height: 48px;
+  position: fixed;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-custom {
+  height: 60px;
+  background-color: #222266;
+}
+
+.nav-link {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  color: #ccccff;
+}
+
+.nav-link:hover {
+  color: white;
+  font-weight: 640;
+}
+
+.point {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+  
+.space-46 {
+  height: 46px;
+}
+
+.space-56 {
+  height: 56px;
+}
+
+td .xa {
+  display: block;
+}
+
+.widething {
+  width: 80%;
+}

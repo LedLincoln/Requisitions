@@ -1,0 +1,88 @@
+<div class='modal fade' id='lineitem' tabindex='-1' role='dialog'>
+<div class='modal-dialog modal-lg' role='document'>
+<div class='modal-content'>
+<!-- <form method='POST' id='lineitemform' action='disppost.php'> -->
+<form method='POST' id='lineitemform' action='proclineitem.php'>
+<?php
+echo "<input type='hidden' name='reqid' value='$rid'>\n";
+echo "<input type='hidden' name='lineid' id='lineid'>\n";
+?>
+<div class='modal-header'>
+<h5 class='modal-title'>Line Item</h5>
+<button type='button' class='close' data-dismiss='modal'>
+<span>&times;</span>
+</button>
+</div>
+<div class='modal-body'>
+<div class='row'>
+<div class='col'><span class='labl'>Type: </span>
+<!-- <select class='compact narrow-100' name='litype' id='litype'> -->
+<?php
+foreach($litypes as $lk=>$lv) {
+  //echo "<Option value='$lk'>$lv</option>\n";
+  echo "<input type='radio' name='litype' value='$lk'> $lv &nbsp;";
+}
+?>
+<!-- </select> -->
+</div>
+</div>
+<div id='lifields'>
+<div class='row'>
+<div class='col-sm-3'><span class='labl'>Quantity</span><br>
+<input type='number' min='0' class='compact narrow-60' name='liqty' id='liqty'></div>
+<div class='col-sm-3'><span class='labl'>Unit</span><br>
+<select class='compact' name='liunit' id='liunit'>
+<option value=''>-select-</option>
+<?php
+foreach($units as $u) {
+  $uc = $u->code;
+  $un = $u->unitname;
+  echo "<option value='$uc'>$un</option>\n";
+}
+?>
+</select>
+</div>
+<div class='col-sm-3'><span class='labl'>Price each</span><br>
+<input type='number' min='0' step='0.0001' class='compact narrow-80' name='liprice' id='liprice'></div>
+<div class='col-sm-3'><span class='labl'>Extended price</span><br>
+<input type='number' min='0' step='0.01' class='compact narrow-100' id='liextprice' readonly></div>
+</div>
+<div class='row'>
+<div class='col-sm-3'><span class='labl'>Vendor part no</span><br>
+<input type='text' class='compact narrow-100' name='livendpn' id='livendpn'></div>
+<div class='col-sm-3'><span class='labl'>LI-COR part no</span><br>
+<input type='text' class='compact narrow-100' name='lilicorpn' id='lilicorpn'></div>
+<div class='col-sm-3'><span class='labl'>Delivery date</span><br>
+<input type='date' class='compact narrow-100' name='deldate' id='deldate'></div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-12'><span class='labl' id='desclabel'>Description</span><br>
+<input type='text' class='compact narrow-100' name='lidesc' id='lidesc'>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-12'><span class='labl'>Comment</span><br>
+<input type='text' class='compact narrow-100' name='licomment' id='licomment'>
+</div>
+</div>
+<div class='modal-footer'>
+<button type='button' class='btn btn-sm btn-secondary' data-dismiss='modal'>Cancel</button>
+<button type='button' class='btn btn-sm btn-success' id='linext'>Save/Next</button>
+<button type='button' class='btn btn-sm btn-primary' id='lisave'>Save</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<script>
+$("#linext").prop('disabled', true);
+$("#lisave").prop('disabled', true);
+$("input[name='litype']").on('change', function() {
+  if($("input[name='litype']:checked").val()) {
+    $("#linext").prop('disabled', false);
+    $("#lisave").prop('disabled', false);
+  }
+});
+</script>

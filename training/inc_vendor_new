@@ -1,0 +1,42 @@
+<?php
+echo "<div class='container reqsec $rstyle'>\n";
+echo "<div class='row'>\n";
+echo "<div class='col-sm-2 text-right labl'>Suggested vendor:</div>\n";
+echo "<div class='col-sm-3'><input class='compact' name='sugvnum' id='sugvnum' value='$sugvnum'> <span class='popchar' id='sugvhelp'>?</span></div>\n";
+echo "<div class='col-sm-1 text-right labl'>Priority:</div><div class='col-sm-6 dval'>\n";
+foreach($priorities as $p) {
+  if($p[0] == $priority) {
+    echo "<input type='radio' name='priority' value='$p[0]' checked>&nbsp;$p[1]&nbsp;";
+  } else {
+    echo "<input type='radio' name='priority' value='$p[0]'>&nbsp;$p[1]";
+  }
+}
+echo "&nbsp;<span id='specdate'><input type='date' min='$today' class='compact' name='dateneeded' value='$dateneeded'><br>\n";
+echo "<span class='info'>Expedited shipping is expensive - use only if necessary.</span></span>\n";
+
+?>
+</div>
+</div>
+<div class='row'>
+<?php
+echo "<div class='col-sm-2 text-right labl'>Suggested vendor name:</div><div class='col-sm-6 dval' id='dispsugvname'>$sugvname</div>\n";
+?>
+</div>
+<div class='row'>
+<div class='col-sm-2 text-right labl'>Suggested vendor phone:</div>
+<?php
+echo "<div class='col-sm-2'><input type='text' class='compact' name='sugvphone' id='sugvphone' value='$sugvphone'></div>\n";
+echo "<div class='col-sm-2 text-right labl'>Deliver to:</div><div class='col-sm-2 dval'>\n";
+echo "<select class='compact' name='deliverto'>\n";
+echo "<option value=''>-select-</option>\n";
+foreach($dests as $d) {
+  if($d[0] == $deliverto) {
+    echo "<option value='$d[0]' selected>$d[1]</option>\n";
+  } else {
+    echo "<option value='$d[0]'>$d[1]</option>\n";
+  }
+}
+echo "</select>\n";
+echo "</div>\n";
+echo "</div>\n";
+?>
