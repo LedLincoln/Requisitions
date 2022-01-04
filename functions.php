@@ -1,5 +1,6 @@
 <?php
 //$approvallevels = ['S'=>100000000, 'A'=>10000, "B"=>5000, "C"=>2500, "D"=>1000, "E"=>500, "F"=>0];
+//changed 2021-12-17
 $approvallevels = ['S'=>100000000, 'A'=>200000, "B"=>100000, "C"=>50000, "D"=>10000, "E"=>5000, "F"=>2500, "G"=>1000, "H"=>500, "I"=>0];
 function isValidDate($d) {
   $dateparts = explode('-', $d);
