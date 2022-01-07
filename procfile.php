@@ -1,5 +1,5 @@
 <?php
-$okextlist = ['pdf','docx','xlsx','pptx','jpg','jpeg','gif','tiff','png','txt','zip'];
+$okextlist = ['pdf','docx','xlsx','pptx','jpg','jpeg','gif','tiff','png','txt','zip','msg'];
 $uploaddir = 'files/';
 
 require_once 'auth.php';
