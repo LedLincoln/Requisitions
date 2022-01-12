@@ -4,52 +4,40 @@ require_once 'functions8.php';
 require_once 'arrays.php';
 $pobo = $_POST['obo'];
 $amt = $_POST['amount'];
-$ownreq = $_POST['ownreq'];
 $approvers = [];
-/*
-$supers = [];
-$superbeans = R::findAll('requser', "applevel = 'S'");
-foreach($superbeans as $s) {
-  $sname = $s->username;
-  if($pobo != $sname || $amt <= $maxSelfapproval) {
-    array_push($supers, $sname);
-  }
+$abean = R::findOne('requser', 'username = ?', [$pobo]);
+$uid = $abean->id;
+if($uid == 0) {
+  die("Invalid User Specified");
 }
-*/
-//if($amt > $approvallevels['A']) {
-  //big req - use the superapprovers instead the chain of command
-  //$approvers = $supers;
-//} else {
-  $abean = R::findOne('requser', 'username = ?', [$pobo]);
-  $uid = $abean->id;
-  if($uid == 0) {
-    die("Invalid User Specified");
-  }
-  $uname = $abean->username;
-  $mgr = $abean->manager;
+$uname = $abean->username;
+$mgr = $abean->manager;
+//chain of command
+//CEO should list either no one or himself/herself as manager
+//this script could break if user's manager is someone below him/her,
+//causing an infinite loop
+//it currently does not guard against this
+while($mgr != '' and $mgr != $uname) {
   $lletter = $abean->applevel;
   $level = $approvallevels[$lletter];
-  if($ownreq == 'true') {
+  if($pobo == $uname) {
     $level = min($level, $maxselfapproval);
   }
-  while($uname != $mgr and $mgr != '') {
-    if($amt <= $level) {
-      array_push($approvers, $uname);
-    }
-    $uname = $mgr;
-    $abean = R::findOne('requser', 'username = ?', [$uname]);
-    $mgr = $abean->manager;
-    $lletter = $abean->applevel;
-    $level = $approvallevels[$lletter];
+  if($amt <= $level) {
+    array_push($approvers, $uname);
   }
-//add the highest level, if CEO is to be included
-//remark next line if CEO does not want to approve reqs
+  $abean = R::findOne('requser', 'username = ?', [$mgr]);
+  $uname = $abean->username;
+  $mgr = $abean->manager;
+}
+//this will add top level (CEO)
 array_push($approvers, $uname);
-//must have more than just CEO, so return everyone who can
-//approve this amount, even if not in chain of command
-//$ca = count($approvers);
-//array_push($approvers, "$ca-Fred Flintstone");
-if(count($approvers) < 2) {
+$ca = count($approvers);
+//array_push($approvers, "$ca-Wilma Flintstone");
+if($ca <= 1) {
+  //we need optiona other than just CEO, so return everyone who can
+  //approve this amount, even if not in chain of command
+  //get appropriate letter keys from $approvallevels
   $bigenough = array_filter($approvallevels, function($n) {
     global $amt;
     return $n >= $amt;
@@ -57,15 +45,17 @@ if(count($approvers) < 2) {
   $bigkeys = implode(array_keys($bigenough), "', '");
   //exclude self approval if applicable
   if($amt > $maxselfapproval) {
-    $qry = "SELECT username FROM (SELECT username FROM requser WHERE applevel IN ('" . $bigkeys . "')) AS alevel WHERE username <> '" . $obo . "' ORDER BY username";
+    $qry = "SELECT username FROM (SELECT username FROM requser WHERE applevel IN ('" . $bigkeys . "')) AS alevel WHERE username <> '" . $pobo . "' ORDER BY username";
   } else {
     $qry = "SELECT username FROM requser WHERE applevel IN ('" . $bigkeys . "') ORDER BY username";
   }
   $approvers = R::getCol($qry);
-  //array_push($approvers, "Bugs Bunny");
+  $ca = count($approvers);
+  //array_push($approvers, "$ca-Bugs Bunny");
 }
-if(count($approvers) < 1) {
-  array_push($approvers, "Contact Finance for Board Approval");
+if($ca < 1) {
+  //no approvers found, so this req will require board approval
+  $approvers = ["Contact Finance for Board Approval"];
 }
 $jout = json_encode($approvers);
 echo $jout;
