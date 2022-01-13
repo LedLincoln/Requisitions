@@ -1,7 +1,7 @@
 <?php
 require_once 'auth.php';
 //require_once 'functions.php';
-require_once 'functions8.php';
+require_once 'functions.php';
 require_once 'arrays.php';
 $created = $createdby = $approvedby = $approvaldate = $hotreq = $status = $dept = $description = $special = $onbehalf = $account = $glaccount = $project = $sugvnum = $sugvname = $sugvphone = $actvnum = $actvname = $actvphone = $priority = $dateneeded = $shipvia = $deliverto = $delinstr = $comments = $erppotype = $buyercode = $assignedto = $orderedby = $orderdate = $ordermethod = $vendorcontact = $confnumber = $payment = $ccard = $xfer = $log = $pcheck = $reqdate = '';
 $gtype = $_GET['type'] ?? '';

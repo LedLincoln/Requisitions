@@ -202,12 +202,15 @@ $("#submitbtn").click(function() {
   }
   var url = "getapprovers8.php";
   var obo = $("#onbehalf").val();
+/*
   if(currentuser == createdby || currentuser == obo) {
     var ownreq = true;
   } else {
     var ownreq = false;
   }
-  var pdata = {'obo':obo, 'amount':amt, 'ownreq':ownreq};
+*/
+  //var pdata = {'obo':obo, 'amount':amt, 'ownreq':ownreq};
+  var pdata = {'obo':obo, 'amount':amt};
   $("#approverlist").empty();
   $.ajax({
     url: url,

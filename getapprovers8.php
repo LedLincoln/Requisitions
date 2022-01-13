@@ -1,6 +1,6 @@
 <?php
 require_once 'auth.php';
-require_once 'functions8.php';
+require_once 'functions.php';
 require_once 'arrays.php';
 $pobo = $_POST['obo'];
 $amt = $_POST['amount'];

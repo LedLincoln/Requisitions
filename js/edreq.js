@@ -207,7 +207,8 @@ $("#submitbtn").click(function() {
   } else {
     var ownreq = false;
   }
-  var pdata = {'obo':obo, 'amount':amt, 'ownreq':ownreq};
+  //var pdata = {'obo':obo, 'amount':amt, 'ownreq':ownreq};
+  var pdata = {'obo':obo, 'amount':amt};
   $("#approverlist").empty();
   $.ajax({
     url: url,
